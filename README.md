@@ -47,9 +47,9 @@ Note that all of the steps are tested on Ubuntu 18.04
 - Copy **first box** to **test/boxes** directory: `cp xenial64_0_1/xenial64_0.1.box test/boxes`
 - Change to **test** directory: `cd test`
 - Add **first_box** locally to vagrant: `vagrant box add --name rr boxes/xenial64_0.1.box`, `rr` is the name of the box (can be any other name)
-- Screenshot vagrant_add_local
+  ![](https://github.com/berchev/private_vagrant_cloud_manually/blob/master/images/vagrant_add_local.png)
 - Now place in the current directory minimal **Vagrantfile** template (no help comments): `vagrant init -m rr`
-- Screenshot vagrant_init
+  ![](https://github.com/berchev/private_vagrant_cloud_manually/blob/master/images/vagrant_init.png)
 - You can test your box: `vagrant up`
 - Connect to the box: `vagrant ssh`
 - Type: `exit`
@@ -58,7 +58,7 @@ Note that all of the steps are tested on Ubuntu 18.04
 
 ## Part III - Create catalog (versioning) for one box
 - Determine sha1 of your **first_box**: `openssl sha1 boxes/xenial64_0.1.box`
-- screenshot first_box_sha1
+  ![](https://github.com/berchev/private_vagrant_cloud_manually/blob/master/images/first_box_sha1.png)
 - Create catalog file **xenial64.json** into **test** directory: `touch xenial64.json`
 - With your favorite editor add following content to the file you just created - **xenial64.json**
 ```
@@ -95,7 +95,7 @@ end
 - Field **config.vm.box**  should be the same as name you have defined in **xenial64.json** file. Otherwise you will hit an error telling you that you are requesting different name
 - Field **config.vm.box_url** should be full path to **xenial64.json**
 - Now you are ready to do `vagrant up`, **without** adding the box manually
-- screenshot first_box_vagrant_up
+  ![](https://github.com/berchev/private_vagrant_cloud_manually/blob/master/images/first_box_vagrant_up.png)
 - During vagrant up process, you have to see line that shows **loading metadata for box...** and **Successfully added box 'xenial64' (v0.1)**
 - Halt the VM, do not destroy it! `vagrant halt`
 
@@ -103,7 +103,7 @@ end
 - Currently you are into **test** directory 
 - Add the **second_box** to **boxes** directory: `cp ../xenial64_0_2/xenial64_0.2.box boxes/`
 - Determine sha1 of your **second_box**: `openssl sha1 boxes/xenial64_0.2.box`
-- Screenshot of second box sha1
+  ![](https://github.com/berchev/private_vagrant_cloud_manually/blob/master/images/second_box_sha1.png)
 - Edit **xenial64.json** with adding some new lines:
 ```
 {
@@ -140,12 +140,12 @@ end
 
 Now you can check whether your box is outdated (If everything is ok with your configuration, you are supposed to see the new version)
 - **Vagrantfile** is located in our current working directory:
-- screenshot ls_vagrantfile
+  ![](https://github.com/berchev/private_vagrant_cloud_manually/blob/master/images/ls_vagrantfile.png)
 - Let's check whether our box is outdated: `vagrant box outdated`
-- Screenshot outdated box
+  ![](https://github.com/berchev/private_vagrant_cloud_manually/blob/master/images/outdated_box.png)
 - Note: Instead of manually asking for outdated boxes, vagrant will notify you automatically when you use the Vagrant commands like `vagrant up`, `vagrant reload`, `vagrant resume`, etc.!
 - Execute: `vagrant box update`
-- screenshot vagrant_box_update
+  ![](https://github.com/berchev/private_vagrant_cloud_manually/blob/master/images/vagrant_box_update.png)
 - Note that box with version **0.1** still exists. Vagrant will never remove your boxes automatically because of potential data loss.
 - Execute: `vagrant destroy`
 - Remove the old box: `vagrant box remove 'xenial64' --box-version '0.1'`
@@ -257,7 +257,7 @@ server {
 
 ## Part VI - Test your private vagrant cloud
 - Open URL `http://www.example.com/vagrant/xenial64/boxes/` and you have to list both boxes:
-- Screenshot test_1
+  ![](https://github.com/berchev/private_vagrant_cloud_manually/blob/master/images/test_1.png)
 - Go to your test directory: `cd ~/gberchev/spreadsheet/vagrant_test/private_vagrant_cloud_manually/test` (Note that the **path** on your computer probably will be different)
 - Edit the Vagrantfile in this way:
 ```
@@ -267,7 +267,7 @@ Vagrant.configure("2") do |config|
 end
 ```
 - Execute: `vagrant up` and everything should work!
-- Screeenshot 
+  ![](https://github.com/berchev/private_vagrant_cloud_manually/blob/master/images/test_2.png) 
 - Clean after the last test: `vagrant destroy`, `vagrant box remove vagrant/xenial64` and `rm -rf .vagrant`
 
 ATTENTION! Now we will do something more fancy!
@@ -276,5 +276,5 @@ ATTENTION! Now we will do something more fancy!
 - Let's throw some light on this! By default, if you do `vagrant init -m <box_name>`, vagrant will search the box into [Vagrant Cloud](https://app.vagrantup.com/boxes/search). After you set Environment variable **VAGRANT_SERVER_URL**, you will change the default searching path of vagrant and now will point to our newly configured webserver **http://www.example.com/**
 - Type: `vagrant init -m vagrant/xenial64`
 - Type: `vagrant up` and enjoy! Your private vagrant cloud works like the real [Vagrant Cloud](https://app.vagrantup.com/boxes/search)
-- Screenshot 
+![](https://github.com/berchev/private_vagrant_cloud_manually/blob/master/images/test_3.png)
 - Do not forget to clean after yourself: `vagrant destroy`, `vagrant box remove vagrant/xenial64` and `rm -rf .vagrant`

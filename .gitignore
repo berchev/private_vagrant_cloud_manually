@@ -1,0 +1,5 @@
+	test/.vagrant/
+	test/Vagrantfile
+	test/boxes/xenial64_0.1.box
+	test/boxes/xenial64_0.2.box
+	test/xenial64.json

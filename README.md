@@ -20,14 +20,16 @@ Note that all of the steps are tested on Ubuntu 18.04
 |    test/boxes          | These directories are intentionally empty. We are going to use them in the project explanation |
 |    xenial64_0_1        | All needed configuration required to create clean Xenial64 box  |
 |    xenial64_0_2        | All needed configuration required to create Xenial64 box with some tools (kitchen, pythoon 3.6) installed |
+|          images        | All screenshtos needed for readme file |
+|     README.md          | Instructions file |
 
 ## Repo content
-- **Part I** - Boxes preparation
-- **Part II** - Add box locally to vagrant
-- **Part III** - Create catalog (versioning) for one box
-- **Part IV** - Adding the second box to the catalog (versioning)
-- **Part V** - Setup private vagrant cloud
-- **Part VI** - Test your private vagrant cloud
+- [**Part I** - Boxes preparation](https://github.com/berchev/private_vagrant_cloud_manually#part-i---boxes-preparation)
+- [**Part II** - Add box locally to vagrant](https://github.com/berchev/private_vagrant_cloud_manually#part-ii---add-box-locally-to-vagrant)
+- [**Part III** - Create catalog (versioning) for one box](https://github.com/berchev/private_vagrant_cloud_manually#part-iii---create-catalog-versioning-for-one-box)
+- [**Part IV** - Adding the second box to the catalog (versioning)](https://github.com/berchev/private_vagrant_cloud_manually#part-iv---adding-the-second-box-to-the-catalog-versioning)
+- [**Part V** - Setup private vagrant cloud](https://github.com/berchev/private_vagrant_cloud_manually#part-v---setup-private-vagrant-cloud)
+- [**Part VI** - Test your private vagrant cloud](https://github.com/berchev/private_vagrant_cloud_manually#part-vi---test-your-private-vagrant-cloud)
 
 ## Let's start!
 - Download this repo: `git clone https://github.com/berchev/private_vagrant_cloud_manually.git`
@@ -278,3 +280,5 @@ ATTENTION! Now we will do something more fancy!
 - Type: `vagrant up` and enjoy! Your private vagrant cloud works like the real [Vagrant Cloud](https://app.vagrantup.com/boxes/search)
 ![](https://github.com/berchev/private_vagrant_cloud_manually/blob/master/images/test_3.png)
 - Do not forget to clean after yourself: `vagrant destroy`, `vagrant box remove vagrant/xenial64` and `rm -rf .vagrant`
+
+## TODO
